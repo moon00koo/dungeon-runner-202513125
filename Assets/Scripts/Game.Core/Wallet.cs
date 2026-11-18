@@ -4,6 +4,7 @@ namespace Game.Core
     public class Wallet
     {
         public int gold;
+        private int maxGold = 999999;
 
         public bool TrySpend(int price)
         {
@@ -14,13 +15,13 @@ namespace Game.Core
         public void GrantStageReward(int amount)
         {
             gold += amount;
-            if (gold > 999999) gold = 999999;
+            if (gold > maxGold) gold = maxGold;
         }
 
         public void GrantShopRefund(int amount)
         {
             gold += amount;
-            if (gold > 999999) gold = 999999;
+            if (gold > maxGold) gold = maxGold;
         }
     }
 }

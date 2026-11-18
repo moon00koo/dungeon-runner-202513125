@@ -71,12 +71,11 @@ namespace Game.Core.Tests
         }
 
         // ── [TODO 5] Wallet 보유 한도 경계 — 999,990 + 20 은?
-        [Test, Ignore("TODO")]
         public void Wallet_GoldCap_Boundary()
         {
             var w = new Wallet { gold = 999990 };
             w.GrantStageReward(20);
-            Assert.AreEqual(0 /* TODO */, w.gold);
+            Assert.AreEqual(999999, w.gold);
         }
 
         // ── [TODO 6] CombatCalc — "slime"과 "boss" 각 한 건 (문자열 분기 고정)
