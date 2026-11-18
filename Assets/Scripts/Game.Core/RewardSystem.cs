@@ -12,24 +12,41 @@ namespace Game.Core
         public int Proc(int t, int c, int b, bool isEvent, int diff)
         {
             // --- 보상 계산 ---
-            int r = c * 10 + b * 50;
-            if (diff == 2) r = (int)(r * 1.2f);
-            if (diff == 3) r = (int)(r * 1.5f);
-            if (isEvent) r = (int)(r * 1.5f);
+            int r = CalculateReward(c, b, isEvent, diff);
 
             // --- 등급 판정 ---
+            r = Grading(t, r);
+
+            // --- 기록 ---
+            return MemoryLastReward(r);
+
+            // int oldR = c * 8;   // 예전 공식 (혹시 몰라 남겨 둠)
+            // if (isEvent) oldR = oldR * 2;
+        }
+
+        private int MemoryLastReward(int r)
+        {
+            lastR = r;
+            return r;
+        }
+
+        private int Grading(int t, int r)
+        {
             if (t < 60) grade = "S";
             else if (t < 90) grade = "A";
             else if (t < 120) grade = "B";
             else grade = "C";
             if (grade == "S") r += 100;
-
-            // --- 기록 ---
-            lastR = r;
             return r;
+        }
 
-            // int oldR = c * 8;   // 예전 공식 (혹시 몰라 남겨 둠)
-            // if (isEvent) oldR = oldR * 2;
+        private static int CalculateReward(int c, int b, bool isEvent, int diff)
+        {
+            int r = c * 10 + b * 50;
+            if (diff == 2) r = (int)(r * 1.2f);
+            if (diff == 3) r = (int)(r * 1.5f);
+            if (isEvent) r = (int)(r * 1.5f);
+            return r;
         }
     }
 }
