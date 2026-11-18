@@ -34,43 +34,44 @@ namespace Game.Core.Tests
         }
 
         // ── [TODO 1] 경계값: t=60 — 경계의 반대쪽. 등급과 보상액은?
-        [Test, Ignore("TODO: 기대값을 채우고 Ignore를 지울 것")]
+        [Test]
         public void Proc_TimeBoundary_60()
         {
             var sut = new RewardSystem();
             int reward = sut.Proc(t: 60, c: 1, b: 0, isEvent: false, diff: 1);
-            Assert.AreEqual(0 /* TODO */, reward);
-            Assert.AreEqual("?" /* TODO */, sut.grade);
+            Assert.AreEqual(10, reward);
+            Assert.AreEqual("A", sut.grade);
         }
 
         // ── [TODO 2] 동등 분할: 이벤트 배율 — isEvent=true 클래스
-        [Test, Ignore("TODO")]
+        [Test]
         public void Proc_EventMultiplier()
         {
             var sut = new RewardSystem();
             int reward = sut.Proc(t: 100, c: 4, b: 0, isEvent: true, diff: 1);
-            Assert.AreEqual(0 /* TODO */, reward);
+            Assert.AreEqual(60, reward);
         }
 
         // ── [TODO 3] 동등 분할: 난이도 3 배율
-        [Test, Ignore("TODO")]
+        [Test]
         public void Proc_Diff3_Multiplier()
         {
             var sut = new RewardSystem();
             int reward = sut.Proc(t: 100, c: 2, b: 1, isEvent: false, diff: 3);
-            Assert.AreEqual(0 /* TODO */, reward);
+            Assert.AreEqual(105, reward);
         }
 
         // ── [TODO 4] 경계값: t=120 — C 등급 경계
-        [Test, Ignore("TODO")]
+        [Test]
         public void Proc_TimeBoundary_120()
         {
             var sut = new RewardSystem();
             sut.Proc(t: 120, c: 0, b: 0, isEvent: false, diff: 1);
-            Assert.AreEqual("?" /* TODO */, sut.grade);
+            Assert.AreEqual("C", sut.grade);
         }
 
         // ── [TODO 5] Wallet 보유 한도 경계 — 999,990 + 20 은?
+        [Test]
         public void Wallet_GoldCap_Boundary()
         {
             var w = new Wallet { gold = 999990 };
@@ -79,12 +80,12 @@ namespace Game.Core.Tests
         }
 
         // ── [TODO 6] CombatCalc — "slime"과 "boss" 각 한 건 (문자열 분기 고정)
-        [Test, Ignore("TODO")]
+        [Test]
         public void CombatCalc_Slime_And_Boss()
         {
             var c = new CombatCalc();
-            Assert.AreEqual(0 /* TODO */, c.Damage("slime", 5));
-            Assert.AreEqual(0 /* TODO */, c.Damage("boss", 10));
+            Assert.AreEqual(4, c.Damage("slime", 5));
+            Assert.AreEqual(7, c.Damage("boss", 10));
         }
     }
 }
